@@ -1,0 +1,75 @@
+{
+  "order": {
+    "customer": {
+      "first_name": "bb",
+      "last_name": "bb",
+      "email": "bb@swsm.uk",
+      "phone": "+442012345678",
+      "verified_email": true,
+      "addresses": [
+        {
+          "address1": "56 Rockfield Way",
+          "address2": "Wellesbourne",
+          "address3": "Warwick",
+          "city": "Warwickshire",
+          "phone": "+442012345678",
+          "zip": "AB12 3BC",
+          "country": "CA"
+        }
+      ]
+    },
+    "billing": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "address": {
+        "address1": "56 Rockfield Way",
+        "address2": "Wellesbourne",
+        "address3": "Warwick",
+        "city": "Warwickshire",
+        "phone": "+442012345678",
+        "zip": "AB12 3BC",
+        "country": "CA"
+      }
+    },
+    "shipping_address": {
+      "address1": "56 Rockfield Way",
+      "address2": "Wellesbourne",
+      "address3": "Warwick",
+      "city": "Warwickshire",
+      "phone": "+442012345678",
+      "zip": "AB12 3BC",
+      "country": "CA"
+    },
+    "line_items": [
+      {
+        "sku": "CB200LTWBKITSUB",
+        "title": "Example Product 1",
+        "price": 0,
+        "quantity": 1,
+        "variant_id": 123456789,
+        "properties": [
+          {
+            "name": "Color",
+            "value": "Red"
+          },
+          {
+            "name": "Size",
+            "value": "Medium"
+          }
+        ]
+      },
+      {
+        "sku": "RDKITXXXSUB",
+        "title": "Example Product 2",
+        "price": 0,
+        "quantity": 1
+      },
+      {
+        "sku": "HS227WBKITSUB",
+        "title": "Example Product 3",
+        "price": 0,
+        "quantity": 1
+      }
+    ]
+  }
+}

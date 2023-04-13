@@ -1,0 +1,12 @@
+Fix issues with Telephone field
+Make product line dynamic
+Set up variations
+error updating the Country
+Create .env file / constants file so the access details are hidden
+Error handling: The script should include more detailed error handling to provide more informative error messages to the user.
+
+Use a logger: Instead of relying on printing messages to the console, the script should use a logging library to log errors, warnings, and other messages to a log file.
+
+Documentation: The script could benefit from some documentation to explain what each part of the script does, and any prerequisites or assumptions.
+
+Unit tests: The script could be enhanced with some unit tests to ensure its functionality.

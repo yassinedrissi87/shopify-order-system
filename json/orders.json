@@ -1,0 +1,106 @@
+[
+  {
+    "order_reference": "SWSM11111111",
+    "customer": {
+      "title": "Mr",
+      "forename": "Stephen",
+      "surname": "Brooks",
+      "address": {
+        "house_name_number": "56 Rockfield Way",
+        "line_1": "Wellesbourne",
+        "line_2": "Warwick",
+        "line_3": "",
+        "county": "",
+        "postcode": "AB12 3BC"
+      },
+      "telephone": "+442012345678",
+      "email": "test1@swsm.uk"
+    },
+    "products": [
+      {
+        "code": "CB200LTWBKITSUB",
+        "qty": 1
+      }
+    ],
+    "order_line": "daily"
+  },
+  {
+    "order_reference": "SWSM22222222",
+    "customer": {
+      "title": "Mr",
+      "forename": "Stephen",
+      "surname": "Brooks",
+      "address": {
+        "house_name_number": "19 Ploughmans Drive",
+        "line_1": "Sheepshed",
+        "line_2": "Coventry",
+        "line_3": "",
+        "county": "",
+        "postcode": "AB12 3BC"
+      },
+      "telephone": "+442012345678",
+      "email": "test1@swsm.uk"
+    },
+    "products": [
+      {
+        "code": "RDKITXXXSUB",
+        "qty": 1
+      },
+      {
+        "code": "HS227WBKITSUB",
+        "qty": 1
+      }
+    ],
+    "order_line": "daily"
+  },
+  {
+    "order_reference": "SWSM33333333",
+    "customer": {
+      "title": "Mr",
+      "forename": "Jim",
+      "surname": "Bob",
+      "address": {
+        "house_name_number": "3 Earls Rise",
+        "line_1": "Plymouth",
+        "line_2": "",
+        "line_3": "",
+        "county": "",
+        "postcode": "AB12 3BC"
+      },
+      "telephone": "+442012345678",
+      "email": "test2@swsm.uk"
+    },
+    "products": [
+      {
+        "code": "RDKITXXXSUB",
+        "qty": 1
+      }
+    ],
+    "order_line": "SWW"
+  },
+  {
+    "order_reference": "SWSM44444444",
+    "customer": {
+      "title": "Mr",
+      "forename": "Jim",
+      "surname": "Bob",
+      "address": {
+        "house_name_number": "Busy business",
+        "line_1": "Unit 46, The Industrial Estate",
+        "line_2": "Some Street",
+        "line_3": "Penryn",
+        "county": "",
+        "postcode": "AB12 3BC"
+      },
+      "telephone": "+442012345678",
+      "email": "test3@swsm.uk"
+    },
+    "products": [
+      {
+        "code": "CB200LTWBKITSWW",
+        "qty": 4
+      }
+    ],
+    "order_line": "SWW Business"
+  }
+]
