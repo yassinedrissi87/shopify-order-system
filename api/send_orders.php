@@ -8,32 +8,78 @@
 
 
 //Set Order Endpoint
+function checkCustomer($email){
+    $customerendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/customers/search.json?query=email:'.$email;
+
+    $ch_customer = curl_init();
+    curl_setopt($ch_customer, CURLOPT_URL, $orderendpoint);
+    curl_setopt($ch_customer, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_setopt($ch_customer, CURLOPT_USERPWD, $api_key . ':' . $password);
+    curl_setopt($ch_customer, CURLOPT_RETURNTRANSFER, true);
+
+
+    // execute cURL request and get response
+    $response = curl_exec($ch_customer);
+    $http_code = curl_getinfo($ch_customer, CURLINFO_HTTP_CODE);
+
+    // check for cURL errors
+    if (curl_errno($ch_customer)) {
+        $error_msg = "cURL error: " . curl_error($ch_customer);
+        curl_close($ch_customer);
+
+        // log error and stop execution
+        error_log($error_msg);
+        die("An error occurred while creating the order. Please try again later.");
+    }
+    curl_close($ch_customer);
+
+    count((json_decode($response))->customers)>0{
+        return  ((json_decode($response))->customers)[0];
+    }
+    else{
+        return "nothing found";
+    }
+
+    // close cURL connection
+}
+
+
+
+
+
 $orderendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/orders.json?status=any';
 // Loop through each order
 foreach ($orders as $order) {
 
-   
+   $customerCheck=checkCustomer($order['customer']['email']);
+
+   if($customerCheck=="nothing found"){
+    $customer=array(
+        'first_name' => $order['customer']['forename'],
+        'last_name' => $order['customer']['surname'],
+        'email' => $order['customer']['email'],
+        'phone' => $order['customer']['telephone'],
+        'verified_email' => true,
+        'addresses' => array(
+            array(
+                'address1' => $order['customer']['address']['house_name_number'],
+                'address2' => $order['customer']['address']['line_1'],
+                'address3' => $order['customer']['address']['line_2'],
+                'city' => $order['customer']['address']['line_3'],
+                'phone' => $order['customer']['telephone'],
+                'zip' => $order['customer']['address']['postcode'],
+                'country' => 'CA'
+            )
+        )
+            );
+
+   }else{
+    $customer=$customerCheck;
+   }
   // Create the order data array
   $order_data = array(
         'order' => array(
-            'customer' => array(
-                'first_name' => $order['customer']['forename'],
-                'last_name' => $order['customer']['surname'],
-                'email' => $order['customer']['email'],
-                'phone' => $order['customer']['telephone'],
-                'verified_email' => true,
-                'addresses' => array(
-                    array(
-                        'address1' => $order['customer']['address']['house_name_number'],
-                        'address2' => $order['customer']['address']['line_1'],
-                        'address3' => $order['customer']['address']['line_2'],
-                        'city' => $order['customer']['address']['line_3'],
-                        'phone' => $order['customer']['telephone'],
-                        'zip' => $order['customer']['address']['postcode'],
-                        'country' => 'CA'
-                    )
-                )
-            ),
+            'customer' => $customer,
             'billing' => array(
                 'first_name' => $order['customer']['forename'],
                 'last_name' => $order['customer']['surname'],
