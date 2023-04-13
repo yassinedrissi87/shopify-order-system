@@ -8,13 +8,15 @@
 
 
 //Set Order Endpoint
-function checkCustomer($email){
-    $customerendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/customers/search.json?query=email:'.$email;
+function checkCustomer($email,$phone){
+    $phone=str_replace('+','',$phone);
+    $phone=preg_replace('/\s+/', '', $phone);
+    $customerendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/customers/search.json?query=(email:'.$email.') OR (phone:'.$phone.')';
 
     $ch_customer = curl_init();
-    curl_setopt($ch_customer, CURLOPT_URL, $orderendpoint);
+    curl_setopt($ch_customer, CURLOPT_URL, $customerendpoint);
     curl_setopt($ch_customer, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_setopt($ch_customer, CURLOPT_USERPWD, $api_key . ':' . $password);
+    curl_setopt($ch_customer, CURLOPT_USERPWD, 'da0ad3091908bd22bcd8f4ac6df794fd' . ':' . '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');
     curl_setopt($ch_customer, CURLOPT_RETURNTRANSFER, true);
 
 
@@ -32,8 +34,8 @@ function checkCustomer($email){
         die("An error occurred while creating the order. Please try again later.");
     }
     curl_close($ch_customer);
-
-    count((json_decode($response))->customers)>0{
+ 
+    if(count((json_decode($response))->customers)>0){
         return  ((json_decode($response))->customers)[0];
     }
     else{
@@ -51,7 +53,7 @@ $orderendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/orders.json?
 // Loop through each order
 foreach ($orders as $order) {
 
-   $customerCheck=checkCustomer($order['customer']['email']);
+   $customerCheck=checkCustomer($order['customer']['email'],$order['customer']['telephone']);
 
    if($customerCheck=="nothing found"){
     $customer=array(
@@ -75,7 +77,9 @@ foreach ($orders as $order) {
 
    }else{
     $customer=$customerCheck;
-   }
+   };
+
+
   // Create the order data array
   $order_data = array(
         'order' => array(
@@ -102,7 +106,16 @@ foreach ($orders as $order) {
                 'zip' => $order['customer']['address']['postcode'],
                 'country' => 'CA'
             ),
-            'line_items'=>$order['products']
+            'line_items'=>
+            array_map(function ($a) { 
+                $a['price']=0;
+                $a['name']='test name';
+                $a['title']='test title';
+
+                
+                return $a; }, $order['products'])
+            
+            
       )
     );
 
@@ -144,6 +157,8 @@ foreach ($orders as $order) {
         // log error and stop execution
         $error_msg = "Error creating order: " . $response;
         error_log($error_msg);
+        echo($error_msg);
+
         die("An error occurred while creating the order. Please try again later.");
     }
         
