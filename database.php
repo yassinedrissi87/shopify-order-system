@@ -9,7 +9,7 @@
 $host = 'localhost';
 $username = '';
 $password = '';
-$dbname = '';
+$dbname = 'shopifiy';
 
 $conn = mysqli_connect($host, $username, $password, $dbname);
 

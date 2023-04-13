@@ -11,6 +11,8 @@
 $orderendpoint = 'https://ipltester.myshopify.com/admin/api/2023-01/orders.json?status=any';
 // Loop through each order
 foreach ($orders as $order) {
+
+   
   // Create the order data array
   $order_data = array(
         'order' => array(
@@ -54,18 +56,13 @@ foreach ($orders as $order) {
                 'zip' => $order['customer']['address']['postcode'],
                 'country' => 'CA'
             ),
-            'line_items'=>array(
-                array(
-                  'title' => 'Example Product 1',
-                  'price' => 0,
-                  'quantity' => 1,
-                  'variant_id' => 1234567890
-               )
-            )
+            'line_items'=>$order['products']
       )
     );
+
+
     // convert order data to JSON
-    $order_json = json_encode($order_data);
+   $order_json = json_encode($order_data);
 
     // set cURL options
     $ch = curl_init();
@@ -104,4 +101,5 @@ foreach ($orders as $order) {
         die("An error occurred while creating the order. Please try again later.");
     }
         
+    
   }
